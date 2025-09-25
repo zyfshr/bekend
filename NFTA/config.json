@@ -1,0 +1,29 @@
+{
+  "tokenStandard": "nft",
+  "number": 2,
+  "symbol": "CNFT",
+  "sellerFeeBasisPoints": 0,
+  "isMutable": true,
+  "isSequential": true,
+  "creators": [
+    {
+      "address": "Ah3ZiaBNF2w1cQsfEkRMXL6ftdc6stcjWpeg7iaZvN72",
+      "share": 100
+    }
+  ],
+  "uploadMethod": "pinata",
+  "ruleSet": null,
+  "awsConfig": null,
+  "sdriveApiKey": null,
+  "nftStorageAuthToken": null,
+  "shdwStorageAccount": null,
+  "pinataConfig": {
+    "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIwM2RjYmFhZS1hZjIyLTRhNWUtYTY1NC04YTZhOTEzOTgyN2MiLCJlbWFpbCI6Inp5ZnNnckBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwicGluX3BvbGljeSI6eyJyZWdpb25zIjpbeyJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MSwiaWQiOiJGUkExIn0seyJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MSwiaWQiOiJOWUMxIn1dLCJ2ZXJzaW9uIjoxfSwibWZhX2VuYWJsZWQiOmZhbHNlLCJzdGF0dXMiOiJBQ1RJVkUifSwiYXV0aGVudGljYXRpb25UeXBlIjoic2NvcGVkS2V5Iiwic2NvcGVkS2V5S2V5IjoiMmU3YTBiMTA3MjE5MDczZDBhZTEiLCJzY29wZWRLZXlTZWNyZXQiOiI1YzI5MDZkMWY3ZmFjNWUyMzhmZTljMGRlZGMzMTEwNWNjZGNlNGIxZDZjMWI2NTI5ZGQ2MTBjYWMzNjYxZjE0IiwiZXhwIjoxNzgxODUxOTcxfQ.KPjYf1zdXjtSsHNhEZ9VDr0o-A9mD8hHQxhrE4Dz9HY",
+    "apiGateway": "https://api.pinata.cloud",
+    "contentGateway": "https://gateway.pinata.cloud",
+    "parallelLimit": 30
+  },
+  "hiddenSettings": null,
+  "guards": null,
+  "maxEditionSupply": null
+}

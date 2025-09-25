@@ -1,0 +1,26 @@
+{
+  "program": {
+    "candyMachine": "RQHvr7tBph6URsSBjoPtX2exFuvZimmqSWcFmc1nuUY",
+    "candyGuard": "",
+    "candyMachineCreator": "FdPjSCymgKxenbnoZh2Kb62C5AuXubepuM9pCmmMW9K",
+    "collectionMint": "GH3vLkzXM1SkhZJZpshRLetJU4PS1zJaqaLCWxZp6ERZ"
+  },
+  "items": {
+    "0": {
+      "name": "primary UnionKey",
+      "image_hash": "2d158fb6cd7d8b8e1e264fb80225638f7e4f74bacee90c927630c3a09ae0b4ba",
+      "image_link": "https://gateway.pinata.cloud/ipfs/QmUkrAEHeH7PYFLG5J1JB4HrBWuaPhPATDMjqts1ckEfrN/0.jpg",
+      "metadata_hash": "79aece7431023d9cc9fad0f50a744cb37485df3bb93fdfa455350e9da49c5c9a",
+      "metadata_link": "https://gateway.pinata.cloud/ipfs/QmdwNwTXQDktXANZHJZtTSSZLt4mrZv2Kqi3joGTv1Xum4/0.json",
+      "onChain": true
+    },
+    "1": {
+      "name": "primary UnionKey",
+      "image_hash": "2d158fb6cd7d8b8e1e264fb80225638f7e4f74bacee90c927630c3a09ae0b4ba",
+      "image_link": "https://gateway.pinata.cloud/ipfs/QmQqsw9yHR9BrkJ1utRiFEWSmcNAh7tuMnCSE1vUqTR7fJ/1.jpg",
+      "metadata_hash": "44be8a2a84b2c7d0800ae9f8075ace4cbf845ee837b78f37263e0eebed141622",
+      "metadata_link": "https://gateway.pinata.cloud/ipfs/QmcA1VHJ6CTJgiRDKGUTv3NLavfCWcDH7oztrgbaCW28bg/1.json",
+      "onChain": true
+    }
+  }
+}

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Solana NFT 领取平台</title>
+    <style>
+        :root {
+            --primary: #9945ff;
+            --secondary: #14f195;
+            --dark: #121212;
+            --light: #f8f9fa;
+            --gray: #2d2d3a;
+            --success: #14f195;
+            --error: #ff6b6b;
+            --warning: #ffd166;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', 'Segoe UI', sans-serif; }
+        body { background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); color: var(--light); min-height: 100vh; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        header { text-align: center; margin-bottom: 40px; padding: 20px; background: rgba(25,25,45,0.7); border-radius: 16px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        h1 { font-size: 2.5rem; margin-bottom: 10px; background: linear-gradient(90deg, var(--primary), var(--secondary)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .subtitle { font-size: 1.2rem; color: #a0a0c0; max-width: 600px; margin: 0 auto 20px; }
+        .card { background: rgba(25,25,45,0.7); border-radius: 16px; padding: 30px; margin-bottom: 30px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .card-title { display: flex; align-items: center; margin-bottom: 20px; font-size: 1.5rem; color: var(--secondary); }
+        .card-title span { margin-right: 10px; font-size: 1.8rem; }
+        .nft-item { cursor: pointer; border: 2px solid transparent; border-radius: 12px; overflow: hidden; transition: border-color .2s; width: 200px; }
+        .nft-item.selected { border-color: var(--secondary); }
+        .nft-preview img { width: 200px; height: 200px; border-radius: 12px; object-fit: cover; margin-bottom: 15px; }
+        .wallet-section, .action-section { display: flex; flex-direction: column; gap: 15px; }
+        .wallet-info { display: flex; justify-content: space-between; background: var(--gray); padding: 15px; border-radius: 12px; font-family: monospace; }
+        .status-container { display: flex; flex-wrap: wrap; gap: 15px; margin: 20px 0; }
+        .status-item { flex: 1; min-width: 200px; background: var(--gray); padding: 20px; border-radius: 12px; text-align: center; }
+        .status-label { font-size: .9rem; color: #a0a0c0; margin-bottom: 5px; }
+        .status-value { font-size: 1.3rem; font-weight: bold; }
+        .status-good { color: var(--success); }
+        .status-error { color: var(--error); }
+        .progress-container { margin: 30px 0; }
+        .progress-label { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        .progress-bar { height: 20px; background: var(--gray); border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); border-radius: 10px; transition: width .5s; }
+        .btn { background: linear-gradient(90deg, var(--primary), #6a00ff); color: white; border: none; padding: 14px 28px; font-size: 1.1rem; border-radius: 12px; cursor: pointer; transition: all .3s; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(153,69,255,0.4); }
+        .btn:disabled { background: var(--gray); cursor: not-allowed; transform: none; box-shadow: none; }
+        .btn-secondary { background: var(--gray); }
+        .btn-secondary:hover { background: #3a3a4a; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        footer { text-align: center; margin-top: 40px; padding: 20px; color: #a0a0c0; font-size: .9rem; }
+        .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: var(--secondary); animation: spin 1s ease-in-out infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @media (max-width: 600px) { .container { padding: 10px; } .card { padding: 20px; } h1 { font-size: 2rem; } .subtitle { font-size: 1rem; } .wallet-info { flex-direction: column; gap: 10px; } .status-item { min-width: 100%; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Solana NFT 领取平台</h1>
+            <p class="subtitle">连接您的Solana钱包，领取限量版NFT收藏品。在开发网上免费领取，主网上需要SOL支付Gas费。</p>
+        </header>
+
+        <main>
+            <!-- NFT 选择列表 -->
+            <div class="card" id="nft-list-card">
+                <div class="card-title"><span>🖼️</span><h2>选择要领取的 NFT</h2></div>
+                <div id="nft-list" style="display:flex;gap:20px;flex-wrap:wrap"></div>
+            </div>
+
+            <!-- NFT 预览 -->
+            <div class="card">
+                <div class="card-title"><span>🔍</span><h2>NFT 预览</h2></div>
+                <div class="nft-preview">
+                    <img id="preview-image" src="/images/A.jpg" alt="NFT 预览" />
+                    <h3 id="preview-name">请选择一个 NFT</h3>
+                    <p id="preview-desc">描述将在此显示</p>
+                </div>
+            </div>
+
+            <!-- 钱包连接 -->
+            <div class="card">
+                <div class="card-title"><span>🔐</span><h2>钱包连接</h2></div>
+                <div class="wallet-info"><span>连接状态:</span><span id="connection-status">未连接</span></div>
+                <div class="wallet-info"><span>钱包地址:</span><span id="wallet-address">未连接钱包</span></div>
+                <button id="connect-btn" class="btn">连接 Phantom 钱包</button>
+            </div>
+
+            <!-- 领取动作 -->
+            <div class="card">
+                <button id="claim-btn" class="btn" disabled>领取 NFT</button>
+            </div>
+
+            <!-- 结果提示 -->
+            <div id="result" class="card" style="display:none;">
+                <div id="result-msg" class="result-title"></div>
+                <div id="result-details" class="result-content"></div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Solana NFT 领取平台 &copy; 2023 | 使用前请确保您在开发网环境</p>
+            <p>注意：此平台仅用于演示目的，实际NFT项目需部署到主网</p>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/@solana/web3.js@1.41.1/lib/index.iife.min.js"></script>
+    <script>
+        const BACKEND_URL = 'http://localhost:3001';
+        let userWalletAddress = null, selectedType = null;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            // 获取并渲染 NFT 列表
+            try {
+                const res = await fetch(`${BACKEND_URL}/nfts`);
+                const items = await res.json();
+                const list = document.getElementById('nft-list');
+                items.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'nft-item';
+                    div.onclick = () => selectNft(div, item);
+                    div.innerHTML = `
+                        <img src="${BACKEND_URL}${item.image}" alt="${item.name}" style="width:100%;height:120px;object-fit:cover" />
+                        <h4>${item.name}</h4>
+                        <p style="font-size:0.85rem;color:#ccc">${item.description}</p>
+                    `;
+                    list.appendChild(div);
+                });
+            } catch (e) { console.error('加载 NFT 列表失败', e); }
+
+            document.getElementById('connect-btn').onclick = connectWallet;
+            document.getElementById('claim-btn').onclick = claimNFT;
+        });
+
+        function selectNft(elem, item) {
+            document.querySelectorAll('.nft-item.selected').forEach(d => d.classList.remove('selected'));
+            elem.classList.add('selected');
+            selectedType = item.id;
+            document.getElementById('preview-image').src = item.image;
+            document.getElementById('preview-name').textContent = item.name;
+            document.getElementById('preview-desc').textContent = item.description;
+            if (userWalletAddress) document.getElementById('claim-btn').disabled = false;
+        }
+
+        async function connectWallet() {
+            if (!window.solana || !window.solana.isPhantom) {
+                alert('请安装 Phantom 钱包'); return;
+            }
+            try {
+                const resp = await window.solana.connect();
+                userWalletAddress = resp.publicKey.toString();
+                document.getElementById('connection-status').textContent = '已连接';
+                document.getElementById('wallet-address').textContent = userWalletAddress;
+                if (selectedType) document.getElementById('claim-btn').disabled = false;
+            } catch (e) {
+                console.error('连接失败', e); alert('钱包连接失败');
+            }
+        }
+
+        async function claimNFT() {
+            if (!userWalletAddress || !selectedType) return;
+            const btn = document.getElementById('claim-btn');
+            btn.disabled = true; btn.textContent = '领取中...';
+            try {
+                const res = await fetch(`${BACKEND_URL}/claim`, {
+                    method: 'POST', headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({ userAddress: userWalletAddress, type: selectedType })
+                });
+                const data = await res.json();
+                document.getElementById('result').style.display = 'block';
+                if (data.success) {
+                    document.getElementById('result-msg').textContent = '领取成功 🎉';
+                    document.getElementById('result-details').innerHTML = `<strong>Mint：</strong>${data.mint}<br/><strong>签名：</strong>${data.signature}`;
+                } else {
+                    document.getElementById('result-msg').textContent = '领取失败 ❌';
+                    document.getElementById('result-details').textContent = data.error;
+                }
+            } catch (err) {
+                console.error('领取失败', err);
+                document.getElementById('result').style.display = 'block';
+                document.getElementById('result-msg').textContent = '错误';
+                document.getElementById('result-details').textContent = err.message;
+            } finally {
+                btn.textContent = '领取 NFT';
+            }
+        }
+    </script>
+</body>
+</html>
+

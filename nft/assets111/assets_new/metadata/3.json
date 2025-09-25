@@ -1,0 +1,30 @@
+{
+  "name": "unionkey #4",
+  "symbol": "CNFT",
+  "description": "unionkey #4",
+  "seller_fee_basis_points": 0,
+  "image": "3.png",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Blue"
+    },
+    {
+      "trait_type": "Mood",
+      "value": "Happy"
+    }
+  ],
+  "collection": {
+    "name": "unionkey",
+    "family": "unionkey"
+  },
+  "properties": {
+    "files": [
+      {
+        "uri": "3.png",
+        "type": "image/png"
+      }
+    ],
+    "category": "image"
+  }
+}

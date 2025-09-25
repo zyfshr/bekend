@@ -1,0 +1,2 @@
+{"v":0,"name":"sugar","msg":"Lend me some sugar, I am your neighbor.","level":30,"hostname":"zyf-virtual-machine","pid":41027,"time":"2025-07-23T08:21:05.461141417Z","target":"sugar","line":124,"file":"src/main.rs"}
+{"v":0,"name":"sugar","msg":"Cache exists, loading...","level":30,"hostname":"zyf-virtual-machine","pid":41027,"time":"2025-07-23T08:21:05.480061739Z","target":"sugar_cli::cache","line":161,"file":"src/cache.rs"}

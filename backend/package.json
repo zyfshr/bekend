@@ -1,0 +1,28 @@
+{
+    "name": "candy-machine-v3-backend",
+    "version": "1.0.0",
+    "type": "module",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "@metaplex-foundation/js": "^0.20.1",
+        "@metaplex-foundation/mpl-candy-machine": "^6.1.0",
+        "@metaplex-foundation/umi": "^1.2.0",
+        "@metaplex-foundation/umi-bundle-defaults": "^1.2.0",
+        "@metaplex-foundation/umi-rpc-web3js": "^1.2.0",
+        "@solana/web3.js": "^1.98.2",
+        "async-mutex": "^0.5.0",
+        "axios": "^1.10.0",
+        "body-parser": "^2.2.0",
+        "bs58": "^6.0.0",
+        "cors": "^2.8.5",
+        "dotenv": "^16.5.0",
+        "express": "^5.1.0",
+        "fs": "^0.0.1-security",
+        "path": "^0.12.7",
+        "xlsx": "^0.18.5"
+    },
+    "packageManager": "yarn@4.9.2+sha512.1fc009bc09d13cfd0e19efa44cbfc2b9cf6ca61482725eb35bbc5e257e093ebf4130db6dfe15d604ff4b79efd8e1e8e99b25fa7d0a6197c9f9826358d4d65c3c"
+}
