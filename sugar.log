@@ -1,2 +1,0 @@
-{"v":0,"name":"sugar","msg":"Lend me some sugar, I am your neighbor.","level":30,"hostname":"zyf-virtual-machine","pid":59759,"time":"2025-08-25T07:10:02.006564015Z","target":"sugar","line":124,"file":"src/main.rs"}
-{"v":0,"name":"sugar","msg":"MissingFileError(\"config.json\")","level":50,"hostname":"zyf-virtual-machine","pid":59759,"time":"2025-08-25T07:10:02.07510204Z","target":"sugar_cli::config::parser","line":21,"file":"src/config/parser.rs"}
