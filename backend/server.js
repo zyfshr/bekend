@@ -559,7 +559,45 @@ const APP_UPDATE_INFO = {
   `,
 };
 
-
+function getUpdateInfoForPlatform(platform, currentVersion) {  
+  const platforms = {  
+    ios: {  
+      version: "7.9.1",  
+      updateStrategy: 2,  
+      storeUrl: "https://apps.apple.com/app/id123456789",  
+      changeLog: "iOS更新内容...",  
+      fileSize: 50000000  
+    },  
+    android: {  
+      version: "7.9.1",   
+      updateStrategy: 2,  
+      downloadUrl: "http://192.168.0.102:3000/download-apk",  
+   
+      changeLog: "Android更新内容1...",  
+      fileSize: 45000000  
+    },  
+    desktop: {  
+      version: "7.9.1",  
+      updateStrategy: 0,  
+      downloadUrl: "http://192.168.0.102:3000/download-exe",  
+      changeLog: "桌面端更新内容...",  
+      fileSize: 80000000  
+    },  
+    extension: {  
+      version: "7.9.1",  
+      updateStrategy: 2,  
+      // 不要在这里使用 platformEnv.isExtChrome  
+      storeUrl: "https://chrome.google.com/webstore/detail/xxx",  
+      changeLog: "扩展更新内容..."  
+    }  
+  };  
+  
+  return platforms[platform] || {  
+    version: "7.9.1",  
+    updateStrategy: 2,  
+    changeLog: "通用更新内容"  
+  };  
+}
 
 
 
@@ -671,8 +709,12 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 
-app.get("/my-app-config", (req, res) =>
-   { res.json({ code: 0, data: APP_UPDATE_INFO }); }); 
+app.get("/my-app-config", (req, res) => {  
+  const { platform, version } = req.query;  
+  const updateInfo = getUpdateInfoForPlatform(platform, version);  
+
+  res.json({ code: 0, data: updateInfo });  
+});
 
 app.get('/download-apk', (req, res) => 
   { const filePath = path.join(__dirname, 'apk', 'unionkey4.9.0.apk'); 
