@@ -1,2 +1,0 @@
-{"v":0,"name":"sugar","msg":"Lend me some sugar, I am your neighbor.","level":30,"hostname":"zyf-virtual-machine","pid":22047,"time":"2025-06-20T06:27:30.876170855Z","target":"sugar","line":124,"file":"src/main.rs"}
-{"v":0,"name":"sugar","msg":"Failed to read keypair file: /home/zyf/.config/solana/devnet.json, No such file or directory (os error 2)","level":50,"hostname":"zyf-virtual-machine","pid":22047,"time":"2025-06-20T06:27:30.916994604Z","target":"sugar_cli::setup","line":55,"file":"src/setup.rs"}
